@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres:15
+    networks:
+      - global
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == manager
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: charge_db
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - target: 5432
+        published: 5432
+        protocol: tcp
+        mode: host
+
+networks:
+  global:
+    driver: overlay
+
+volumes:
+  postgres_data:
