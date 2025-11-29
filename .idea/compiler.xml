@@ -9,6 +9,12 @@
         <module name="chargeManeger" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api" target="17" />
+      <module name="app" target="17" />
+      <module name="business" target="17" />
+      <module name="infra" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
