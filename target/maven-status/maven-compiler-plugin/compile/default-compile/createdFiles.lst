@@ -1,3 +1,5 @@
 com\charge\chargeManeger\infra\datasource\DataBaseManager.class
-com\charge\chargeManeger\infra\config\DataBaseConfig.class
+com\charge\chargeManeger\infra\test\TesteConexao.class
+com\charge\chargeManeger\infra\exceptions\CanNotGetConnectionDBException.class
 com\charge\chargeManeger\ChargeManegerApplication.class
+com\charge\chargeManeger\infra\exceptions\GenericDataBaseException.class
