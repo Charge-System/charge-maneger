@@ -20,6 +20,12 @@ Este projeto implementa um sistema completo de gerenciamento de cobranças, com 
 Abra o painel do Maven -> Lifecycle -> clean -> package
 ``
 
+- Cria imagem contendo o .WAR da aplicação no servidor Apache TomCat
+
+``
+docker build -t charge-images/chargemanager:1.0 .
+``
+
 - Iniciar o Swarm na Aplicação Docker
 
 ``
@@ -38,4 +44,14 @@ docker stack deploy -c docker-swarm.yml app
 docker service ls
 ``
 
+- Quando serviço estiver em execução adicione a URL no navegador
+
+``
+http://127.0.0.1:8080/message
+``
+
+
+Messagem esperada
+
+![img.png](img.png)
 
