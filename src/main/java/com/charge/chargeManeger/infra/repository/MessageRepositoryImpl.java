@@ -29,6 +29,7 @@ public class MessageRepositoryImpl implements MessageRepository {
             //tratar
         }
 
-        return new MessageDTO(0, "Nenhuma mensagem encontrada");
+        return new MessageDTO(0, "Hello, world");
     }
+
 }
