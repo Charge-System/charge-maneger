@@ -24,6 +24,13 @@ services:
         protocol: tcp
         mode: host
 
+  server:
+    image: charge-images/chargemanager:1.0
+    ports:
+      - "8080:8080"
+    deploy:
+      replicas: 1
+
 networks:
   global:
     driver: overlay

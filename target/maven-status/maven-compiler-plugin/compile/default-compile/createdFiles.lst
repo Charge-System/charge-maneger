@@ -1,5 +1,9 @@
 com\charge\chargeManeger\infra\datasource\DataBaseManager.class
-com\charge\chargeManeger\infra\test\TesteConexao.class
+com\charge\chargeManeger\business\service\MessageService.class
+com\charge\chargeManeger\api\controller\MessageController.class
+com\charge\chargeManeger\business\ports\MessageRepository.class
+com\charge\chargeManeger\infra\exceptions\GenericDataBaseException.class
+com\charge\chargeManeger\infra\repository\MessageRepositoryImpl.class
+com\charge\chargeManeger\api\dto\MessageDTO.class
 com\charge\chargeManeger\infra\exceptions\CanNotGetConnectionDBException.class
 com\charge\chargeManeger\ChargeManegerApplication.class
-com\charge\chargeManeger\infra\exceptions\GenericDataBaseException.class

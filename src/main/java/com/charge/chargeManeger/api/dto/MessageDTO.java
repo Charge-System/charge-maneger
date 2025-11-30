@@ -2,7 +2,6 @@ package com.charge.chargeManeger.api.dto;
 
 
 //Modelo de dados do banco
-
 public class MessageDTO {
 
     private Integer id;
