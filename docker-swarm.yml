@@ -5,6 +5,12 @@ services:
     image: postgres:15
     networks:
       - global
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d charge_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     deploy:
       replicas: 1
       restart_policy:
@@ -30,6 +36,8 @@ services:
       - "8080:8080"
     deploy:
       replicas: 1
+    depends_on:
+      - database
 
 networks:
   global:

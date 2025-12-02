@@ -12,27 +12,33 @@ public class DataBaseManager {
     private static final String DB_PASSWORD = "postgres";
 
     public static Connection getConnection() {
-
         Connection conx = null;
+        int maxAttempts = 10;
+        long sleepTimeMs = 5000;
 
-        try {
-            conx = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            try {
+                System.out.println("Tentativa de conexão com o banco de dados: " + attempt);
+                conx = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-            //Criando instrução
-            Statement statemente = conx.createStatement();
+                Statement statemente = conx.createStatement();
+                String createTableSQL = "CREATE TABLE IF NOT EXISTS message(id INT PRIMARY KEY, message VARCHAR(50))";
+                statemente.execute(createTableSQL);
+                System.out.println("Tabela 'message' criada com sucesso!");
 
-            //Cria tabela se ela não existir
-            String createTableSQL = "CREATE TABLE IF NOT EXISTS message(id INT PRIMARY KEY, message VARCHAR(50))";
-            statemente.execute(createTableSQL);
-            System.out.println("Tabela 'message' criada!");
+                return conx;
 
-
-        } catch (Exception ex) {
-            if (ex instanceof GeneralSecurityException) {
-                // Tratar erro
+            } catch (Exception ex) {
+                System.err.println("Falha na conexão ou criação da tabela. Tentando novamente em " + sleepTimeMs/1000 + " segundos...");
+                try {
+                    Thread.sleep(sleepTimeMs);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
             }
         }
-
-        return conx;
+        System.err.println("Falha ao conectar e inicializar o banco de dados após " + maxAttempts + " tentativas.");
+        return null;
     }
 }
