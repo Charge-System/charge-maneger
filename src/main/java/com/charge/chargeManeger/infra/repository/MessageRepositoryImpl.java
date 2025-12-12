@@ -26,10 +26,34 @@ public class MessageRepositoryImpl implements MessageRepository {
             }
 
         } catch (Exception e) {
-            //tratar
+            e.printStackTrace();
         }
 
-        return new MessageDTO(0, "Hello, world");
+
+        return new MessageDTO(0, "Sem dados inseridos");
     }
 
+    @Override
+    public MessageDTO saveMessageToDb(MessageDTO messageDTO) {
+        String sql = "INSERT INTO message(message) VALUES(?) RETURNING id";
+
+        try (Connection con = DataBaseManager.getConnection();
+             java.sql.PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, messageDTO.getMessage());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    messageDTO.setId(rs.getInt("id"));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return messageDTO;
+    }
 }
+
+
+

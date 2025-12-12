@@ -6,4 +6,5 @@ com\charge\chargeManeger\infra\exceptions\GenericDataBaseException.class
 com\charge\chargeManeger\infra\repository\MessageRepositoryImpl.class
 com\charge\chargeManeger\api\dto\MessageDTO.class
 com\charge\chargeManeger\infra\exceptions\CanNotGetConnectionDBException.class
+com\charge\chargeManeger\infra\datasource\DataSourceConfig.class
 com\charge\chargeManeger\ChargeManegerApplication.class

@@ -9,4 +9,6 @@ import com.charge.chargeManeger.api.dto.MessageDTO;
 * */
 public interface MessageRepository {
     public MessageDTO getMessageFromDb();
+
+    MessageDTO saveMessageToDb(MessageDTO messageDTO);
 }

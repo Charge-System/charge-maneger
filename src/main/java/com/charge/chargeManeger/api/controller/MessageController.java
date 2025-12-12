@@ -4,9 +4,7 @@ import com.charge.chargeManeger.api.dto.MessageDTO;
 import com.charge.chargeManeger.business.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/message")
@@ -30,4 +28,10 @@ public class MessageController {
         return ResponseEntity.ok(messageDTO);
     }
 
+    @PostMapping("/post")
+    public ResponseEntity<MessageDTO> save(@RequestBody MessageDTO messageDTO) {
+        MessageDTO savedMessage = messageService.saveMessage(messageDTO);
+        return ResponseEntity.ok(savedMessage);
+    }
 }
+

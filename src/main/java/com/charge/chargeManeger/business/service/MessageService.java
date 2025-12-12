@@ -22,4 +22,9 @@ public class MessageService {
     public MessageDTO getMessage(){
         return messageRepository.getMessageFromDb();
     }
+
+    public MessageDTO saveMessage(MessageDTO messageDTO) {
+        MessageDTO savedMessage = messageRepository.saveMessageToDb(messageDTO);
+        return savedMessage;
+    }
 }
