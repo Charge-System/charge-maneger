@@ -8,29 +8,30 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class MessageRepositoryImpl implements MessageRepository {
 
-    private final String SQL_CONSULTAR_MESSAGE = "SELECT id, message FROM message LIMIT 1";
+    private final String SQL_CONSULTAR_MESSAGES = "SELECT id, message FROM message";
+
 
     @Override
-    public MessageDTO getMessageFromDb() {
-
+    public List<MessageDTO> getAllMessagesFromDb() {
+        List<MessageDTO> messages = new ArrayList<>();
         try (Connection con = DataBaseManager.getConnection();
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(SQL_CONSULTAR_MESSAGE)) {
+             ResultSet rs = stmt.executeQuery(SQL_CONSULTAR_MESSAGES)) {
 
-            if (rs.next()) {
-                return new MessageDTO(rs.getInt("id"), rs.getString("message"));
+            while (rs.next()) {
+                messages.add(new MessageDTO(rs.getInt("id"), rs.getString("message")));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        return new MessageDTO(0, "Sem dados inseridos");
+        return messages;
     }
 
     @Override

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/message")
 /*
@@ -22,10 +24,9 @@ public class MessageController {
     }
 
     @GetMapping
-    public ResponseEntity<MessageDTO> getMessage(){
-        MessageDTO messageDTO =  messageService.getMessage();
-
-        return ResponseEntity.ok(messageDTO);
+    public ResponseEntity<List<MessageDTO>> getMessages() {
+        List<MessageDTO> messages = messageService.getAllMessages();
+        return ResponseEntity.ok(messages);
     }
 
     @PostMapping("/post")

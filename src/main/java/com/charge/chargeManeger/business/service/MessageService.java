@@ -5,6 +5,8 @@ import com.charge.chargeManeger.api.dto.MessageDTO;
 import com.charge.chargeManeger.business.ports.MessageRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /*
 * Objetivo: Aplicar as regras de negócio envolvendo as messages
 * */
@@ -19,12 +21,13 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public MessageDTO getMessage(){
-        return messageRepository.getMessageFromDb();
-    }
 
     public MessageDTO saveMessage(MessageDTO messageDTO) {
         MessageDTO savedMessage = messageRepository.saveMessageToDb(messageDTO);
         return savedMessage;
+    }
+
+    public List<MessageDTO> getAllMessages() {
+        return messageRepository.getAllMessagesFromDb();
     }
 }
