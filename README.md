@@ -43,15 +43,37 @@ docker stack deploy -c docker-swarm.yml app
 ``
 docker service ls
 ``
+- Para verificar os logs e confirmar que a tabela foi criada use
+
+``docker service logs app_server --follow  ``
+
+ **Mensagem eesperada**
+![img_2.png](img_2.png)
 
 - Quando serviço estiver em execução adicione a URL no navegador
 
 ``
-http://127.0.0.1:8080/message
+http://localhost:8080/message
 ``
 
 
 Messagem esperada
 
-![img.png](img.png)
+![img_1.png](img_1.png)
 
+
+- Para adicionar uma nova mensagem no banco use a URL : **http://127.0.0.1:8080/message/post**
+e use no corpo da requisição esse formato
+
+``{
+    "id": 1,
+    "message": "Teste"
+}``
+
+- Para visualizar no pgadmin use:
+
+``
+hostname = localhost
+porta = 5432
+database = charge_db
+``
