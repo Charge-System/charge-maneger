@@ -1,0 +1,6 @@
+CREATE TABLE client (
+    id SERIAL PRIMARY KEY,
+    document VARCHAR(11) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);

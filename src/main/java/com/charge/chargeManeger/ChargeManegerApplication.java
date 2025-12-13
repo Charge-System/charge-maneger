@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 import static org.springframework.boot.SpringApplication.*;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication
 public class ChargeManegerApplication extends SpringBootServletInitializer {
 
 	@Override
