@@ -49,4 +49,30 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         }
         return lista;
     }
+    @Override
+    public void atualizar(ClienteDTO cliente) {
+        String sql = "UPDATE cliente SET nome = ?, email = ? WHERE id = ?";
+        try (Connection conn = DataBaseManager.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, cliente.nome());
+            stmt.setString(2, cliente.email());
+            stmt.setLong(3, cliente.id());
+            stmt.executeUpdate();
+        }
+        catch(SQLException e){
+            throw new RuntimeException("Erro ao atualizar cliente");
+        }
+    }
+    @Override
+    public void deletar(Long id) {
+        String sql = "DELETE FROM cliente WHERE id = ?";
+        try(Connection conn = DataBaseManager.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        }
+        catch(SQLException e){
+            throw new RuntimeException("Erro ao deletar cliente");
+        }
+    }
 }

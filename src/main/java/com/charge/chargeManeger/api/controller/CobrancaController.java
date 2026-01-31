@@ -33,4 +33,14 @@ public class CobrancaController {
     public ResponseEntity<List<CobrancaDTO>> buscarPorCliente(@PathVariable Long clienteId) {
         return ResponseEntity.ok(cobrancaService.listarCobrancasPorCliente(clienteId));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarCobranca(@PathVariable Long id) {
+        cobrancaService.removerCobranca(id);
+        return ResponseEntity.ok("Cobranca deletada com sucesso!");
+    }
+    @PutMapping()
+    public ResponseEntity<String> atualizarCobranca(@RequestBody CobrancaDTO dto) {
+        cobrancaService.editarCobranca(dto);
+        return ResponseEntity.ok("Cobranca atualizada com sucesso!");
+    }
 }

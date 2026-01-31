@@ -29,4 +29,15 @@ public class ClienteController {
     public ResponseEntity<List<ClienteDTO>> listar() {
         return ResponseEntity.ok(clienteService.listarTodos());
     }
+
+    @PutMapping()
+    public ResponseEntity<String> atualizar( @RequestBody ClienteDTO dto) {
+        clienteService.atualizarCliente(dto);
+        return ResponseEntity.ok("Cliente atualizado com sucesso!");
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletar(@PathVariable Long id) {
+        clienteService.excluirCliente(id);
+        return ResponseEntity.ok("Cliente deletado com sucesso!");
+    }
 }
