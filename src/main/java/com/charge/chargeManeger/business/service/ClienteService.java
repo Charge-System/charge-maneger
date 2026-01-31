@@ -12,7 +12,7 @@ public class ClienteService {
 
     private final ClienteRepository clienteRepository;
 
-    @Autowired // O Spring injeta o ClienteRepositoryImpl automaticamente aqui
+    @Autowired
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
@@ -26,5 +26,13 @@ public class ClienteService {
 
     public List<ClienteDTO> listarTodos() {
         return clienteRepository.listarTodos();
+    }
+
+    public void atualizarCliente(ClienteDTO dto) {
+        clienteRepository.atualizar(dto);
+    }
+
+    public void excluirCliente(Long id) {
+        clienteRepository.deletar(id);
     }
 }

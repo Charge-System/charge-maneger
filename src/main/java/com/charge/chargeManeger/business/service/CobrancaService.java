@@ -32,4 +32,12 @@ public class CobrancaService {
     public List<CobrancaDTO> listarCobrancas() {
         return cobrancaRepository.listarCobrancas();
     }
+
+    public void removerCobranca(Long id) {
+        cobrancaRepository.removerCobranca(id);
+    }
+    public void editarCobranca(CobrancaDTO dto) {
+        cobrancaRepository.atualizarCobranca(dto);
+    }
+
 }

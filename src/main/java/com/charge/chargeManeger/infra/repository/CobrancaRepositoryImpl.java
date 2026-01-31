@@ -81,4 +81,34 @@ public class CobrancaRepositoryImpl implements CobrancaRepository {
         }
         return cobrancas;
     }
+    @Override
+    public void removerCobranca(Long idCobranca) {
+        String sql = "DELETE FROM cobranca WHERE id = ?";
+        try{Connection conn = DataBaseManager.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, idCobranca);
+            stmt.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException("Erro ao remover cobrança", e);
+        }
+    }
+    @Override
+    public void atualizarCobranca(CobrancaDTO cobrancaDTO) {
+        String sql = "UPDATE cobranca SET \"name\" = ?, \"value\" = ?, \"billing_type\" = ?, \"charge_type\" = ?, \"cliente_id\" = ? WHERE \"id\" = ?";;
+        try (Connection conn = DataBaseManager.getConnection();
+             ) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, cobrancaDTO.name());
+            stmt.setBigDecimal(2, cobrancaDTO.value());
+            stmt.setString(3, cobrancaDTO.billingType() != null ? cobrancaDTO.billingType().name() : null);
+            stmt.setString(4, cobrancaDTO.chargeType() != null ? cobrancaDTO.chargeType().name() : null);
+            stmt.setLong(5, cobrancaDTO.clienteId());
+            stmt.setLong(6, cobrancaDTO.id());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar cobrança", e);
+        }
+    }
 }

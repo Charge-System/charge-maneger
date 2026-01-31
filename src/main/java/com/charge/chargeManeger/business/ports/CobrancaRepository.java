@@ -8,4 +8,7 @@ public interface CobrancaRepository {
     void criarCobranca(CobrancaDTO msg);
     List<CobrancaDTO> buscarPorCliente(Long clienteId);
     List<CobrancaDTO> listarCobrancas();
+    void removerCobranca(Long idCobranca);
+
+    void atualizarCobranca(CobrancaDTO cobrancaDTO);
 }
