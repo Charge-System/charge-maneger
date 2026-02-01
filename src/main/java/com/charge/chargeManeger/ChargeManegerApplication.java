@@ -6,8 +6,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import static org.springframework.boot.SpringApplication.*;
-
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class ChargeManegerApplication extends SpringBootServletInitializer {
 

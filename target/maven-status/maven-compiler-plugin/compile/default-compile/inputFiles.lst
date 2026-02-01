@@ -1,7 +1,9 @@
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\controller\api\ApiResponse.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\controller\ClienteController.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\controller\CobrancaController.java
+C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\dto\ClientCreatedDTO.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\dto\ClienteDTO.java
+C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\dto\CobrancaCreatedDTO.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\dto\CobrancaDTO.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\dto\enums\StatusCobranca.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\api\dto\enums\TipoCobranca.java
@@ -11,6 +13,7 @@ C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\c
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\business\service\ClienteService.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\business\service\CobrancaService.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\business\service\EmailService.java
+C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\business\util\DataUtil.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\business\util\ValidadorUtil.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\ChargeManegerApplication.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\datasource\DataBaseCharge.java
@@ -19,6 +22,9 @@ C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\c
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\exceptions\CanNotGetConnectionDBException.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\exceptions\GenericDataBaseException.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\exceptions\TratadorExcecoes.java
+C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\queue\config\RabbitMQConfig.java
+C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\queue\consumer\QueueConsumer.java
+C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\queue\dto\MessageQueueDTO.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\repository\ClienteRepositoryImpl.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\repository\CobrancaRepositoryImpl.java
 C:\Users\cpiress\Desktop\GitHub\CHARGE\charge-maneger\src\main\java\com\charge\chargeManeger\infra\webservice\ClienteSoapClient.java

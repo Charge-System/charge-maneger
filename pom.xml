@@ -31,17 +31,17 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-web</artifactId>-->
-<!--            <exclusions>-->
-<!--                &lt;!&ndash; Removendo tomcat embutido do spring boot &ndash;&gt;-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework.boot</groupId>-->
-<!--                    <artifactId>spring-boot-starter-tomcat</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <!-- Removendo tomcat embutido do spring boot -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

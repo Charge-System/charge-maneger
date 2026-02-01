@@ -16,7 +16,7 @@ import org.springframework.ws.client.core.WebServiceTemplate;
 @Configuration
 public class SoapClientConfig {
 
-    private final String BASE_URL = "http://127.0.0.1:8081/ws";
+    private final String BASE_URL = "http://chargerproxy:8081/ws";
 
     @Bean
     public Jaxb2Marshaller marshaller() {
