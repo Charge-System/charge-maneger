@@ -1,5 +1,7 @@
 package com.charge.chargeManeger.api.controller;
 
+import com.charge.chargeManeger.api.controller.api.ApiResponse;
+import com.charge.chargeManeger.api.dto.CobrancaCreatedDTO;
 import com.charge.chargeManeger.api.dto.CobrancaDTO;
 import com.charge.chargeManeger.business.service.CobrancaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +11,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cobrancas")
+@RequestMapping("/cobranca")
 public class CobrancaController {
 
     private final CobrancaService cobrancaService;
 
-    @Autowired
     public CobrancaController(CobrancaService cobrancaService) {
         this.cobrancaService = cobrancaService;
     }
 
+    /*
+     * Objetivo: Mapear e encaminhar a solicitação de cadastro
+     * de cliente
+     * */
     @PostMapping
-    public ResponseEntity<String> cadastrarCobranca(@RequestBody CobrancaDTO dto) {
-        cobrancaService.gerarCobranca(dto);
-        return ResponseEntity.ok("Cobrança registrada para o cliente " + dto.clienteId());
+    public ResponseEntity<ApiResponse<CobrancaCreatedDTO>> cadastrarCobranca(@RequestBody CobrancaDTO dto) throws Exception {
+        String idCobrancaAsaas = cobrancaService.gerarCobranca(dto);
+
+        return ResponseEntity.ok(
+                ApiResponse.sucesso("Cobrança efetuada com sucesso", new CobrancaCreatedDTO(idCobrancaAsaas)));
     }
 
     @GetMapping()

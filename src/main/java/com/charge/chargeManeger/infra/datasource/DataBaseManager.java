@@ -8,6 +8,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/*
+* Objetivo: Gerenciar as conexões com o banco de
+* dados do sistema
+* */
 @Component
 public class DataBaseManager {
 
@@ -16,49 +20,24 @@ public class DataBaseManager {
     @Autowired
     public DataBaseManager(DataSource dataSource) {
         this.dataSource = dataSource;
-        initDatabase(); // inicializa a tabela
     }
 
-    private void initDatabase() {
-        try (Connection conx = dataSource.getConnection();
-             Statement statement = conx.createStatement()) {
-
-            // 1. Tabela de Cliente (Pai)
-            String createClienteTable = "CREATE TABLE IF NOT EXISTS cliente (" +
-                    "id SERIAL PRIMARY KEY, " +
-                    "nome VARCHAR(100) NOT NULL, " +
-                    "email VARCHAR(100) UNIQUE NOT NULL" +
-                    ")";
-            statement.execute(createClienteTable);
-            System.out.println("Tabela 'cliente' verificada.");
-
-            // 2. Tabela de Cobranca (Filha - Depende de cliente)
-            String createCobrancaTable = "CREATE TABLE IF NOT EXISTS cobranca (" +
-                    "id SERIAL PRIMARY KEY, " +
-                    "name VARCHAR(20), " +
-                    "value DECIMAL(10,2), " +
-                    "billing_type VARCHAR(20), " +
-                    "charge_type VARCHAR(20), " +
-                    "cliente_id INTEGER, " +
-                    "CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES cliente(id) ON DELETE CASCADE" +
-                    ")";
-            statement.execute(createCobrancaTable);
-            System.out.println("Tabela 'cobranca' verificada.");
-
-            // 3. Tabela de Message (Opcional/Antiga)
-            String createMessageTable = "CREATE TABLE IF NOT EXISTS message(" +
-                    "id SERIAL PRIMARY KEY, " +
-                    "message VARCHAR(50)" +
-                    ")";
-            statement.execute(createMessageTable);
-
-        } catch (SQLException ex) {
-            System.err.println("ERRO NA INICIALIZAÇÃO DO BANCO: " + ex.getMessage());
-            ex.printStackTrace();
-        }
-    }
-
+    /*
+    * Objtivo: Obter uma conexão com o banco de dados
+    * */
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
+    }
+
+    /*
+     * Objtivo: Fechar uma conexão com o banco de dados
+     * */
+    public static void fecharConexão(Connection connection) throws SQLException {
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            throw new SQLException("Não foi possível fechar a conexão: " + ex.getMessage());
+        }
+
     }
 }

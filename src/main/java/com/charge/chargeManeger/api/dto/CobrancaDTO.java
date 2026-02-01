@@ -1,8 +1,16 @@
 package com.charge.chargeManeger.api.dto;
 
-import com.charge.chargeManeger.api.dto.enums.Enums;
+import com.charge.chargeManeger.api.dto.enums.StatusCobranca;
+import com.charge.chargeManeger.api.dto.enums.TipoCobranca;
 
-import java.math.BigDecimal;
+import java.util.Date;
 
-public record CobrancaDTO(Long id, String name, BigDecimal value, Enums.BillingType billingType , Enums.ChargeType chargeType, Long clienteId){
+public record CobrancaDTO
+        (Long id,
+         Double valor,
+         Date dataVencimento,
+         TipoCobranca tipoCobranca,
+         StatusCobranca statusCobranca,
+         String idCobrancaAsaas,
+         String idClienteAsaas){
 }

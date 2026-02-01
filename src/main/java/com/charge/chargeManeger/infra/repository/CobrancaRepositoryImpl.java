@@ -1,8 +1,10 @@
 package com.charge.chargeManeger.infra.repository;
 
 import com.charge.chargeManeger.api.dto.CobrancaDTO;
-import com.charge.chargeManeger.api.dto.enums.Enums;
+import com.charge.chargeManeger.api.dto.enums.StatusCobranca;
+import com.charge.chargeManeger.api.dto.enums.TipoCobranca;
 import com.charge.chargeManeger.business.ports.CobrancaRepository;
+import com.charge.chargeManeger.business.util.DataUtil;
 import com.charge.chargeManeger.infra.datasource.DataBaseManager;
 import org.springframework.stereotype.Repository;
 
@@ -14,16 +16,21 @@ import java.util.List;
 public class CobrancaRepositoryImpl implements CobrancaRepository {
 
     public void criarCobranca(CobrancaDTO dto) {
-        String sql = "INSERT INTO cobranca (value,name, billing_type, charge_type, cliente_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cobranca (valor, tipoCobranca, dataVencimento, status, idCobrancaAsaas, idClienteAsaas) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DataBaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setBigDecimal(1, dto.value());
-            stmt.setString(2, dto.name());
-            stmt.setString(3, dto.billingType().name());
-            stmt.setString(4, dto.chargeType().name());
-            stmt.setLong(5, dto.clienteId());
+            stmt.setDouble(1, dto.valor());
+            stmt.setString(2, dto.tipoCobranca().toString());
+
+            // Alterando data para persistência
+            Date dataSQL = Date.valueOf(DataUtil.converterDataString(dto.dataVencimento()));
+
+            stmt.setDate(3, dataSQL);
+            stmt.setString(4, dto.idCobrancaAsaas());
+            stmt.setString(5, dto.idCobrancaAsaas());
+            stmt.setString(6, dto.idClienteAsaas());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -44,11 +51,12 @@ public class CobrancaRepositoryImpl implements CobrancaRepository {
                 while (rs.next()) {
                     cobrancas.add(new CobrancaDTO(
                             rs.getLong("id"),
-                            rs.getString("name"),
-                            rs.getBigDecimal("value"),
-                            Enums.BillingType.valueOf(rs.getString("billing_type")),
-                            Enums.ChargeType.valueOf(rs.getString("charge_type")),
-                            rs.getLong("cliente_id")
+                            rs.getDouble("valor"),
+                            rs.getDate("dataVencimento"),
+                            TipoCobranca.valueOf(rs.getString("tipoCobranca")),
+                            StatusCobranca.valueOf(rs.getString("status")),
+                            rs.getString("idCobrancaAsaas"),
+                            rs.getString("idClienteAsaas")
                     ));
                 }
             }
@@ -68,11 +76,12 @@ public class CobrancaRepositoryImpl implements CobrancaRepository {
                 while (rs.next()) {
                     cobrancas.add(new CobrancaDTO(
                             rs.getLong("id"),
-                            rs.getString("name"),
-                            rs.getBigDecimal("value"),
-                            Enums.BillingType.valueOf(rs.getString("billing_type")),
-                            Enums.ChargeType.valueOf(rs.getString("charge_type")),
-                            rs.getLong("cliente_id")
+                            rs.getDouble("valor"),
+                            rs.getDate("dataVencimento"),
+                            TipoCobranca.valueOf(rs.getString("tipoCobranca")),
+                            StatusCobranca.valueOf(rs.getString("status")),
+                            rs.getString("idCobrancaAsaas"),
+                            rs.getString("idClienteAsaas")
                     ));
                 }
             }
@@ -93,22 +102,25 @@ public class CobrancaRepositoryImpl implements CobrancaRepository {
             throw new RuntimeException("Erro ao remover cobrança", e);
         }
     }
+
     @Override
-    public void atualizarCobranca(CobrancaDTO cobrancaDTO) {
-        String sql = "UPDATE cobranca SET \"name\" = ?, \"value\" = ?, \"billing_type\" = ?, \"charge_type\" = ?, \"cliente_id\" = ? WHERE \"id\" = ?";;
-        try (Connection conn = DataBaseManager.getConnection();
-             ) {
+    public void atualizarStatusCobranca(String idCobrancaAsaas, StatusCobranca statusCharge) {
+        String sql = "UPDATE cobranca SET status = ? WHERE idCobrancaAsaas = ?";
+
+        try{Connection conn = DataBaseManager.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, cobrancaDTO.name());
-            stmt.setBigDecimal(2, cobrancaDTO.value());
-            stmt.setString(3, cobrancaDTO.billingType() != null ? cobrancaDTO.billingType().name() : null);
-            stmt.setString(4, cobrancaDTO.chargeType() != null ? cobrancaDTO.chargeType().name() : null);
-            stmt.setLong(5, cobrancaDTO.clienteId());
-            stmt.setLong(6, cobrancaDTO.id());
+            stmt.setString(1, statusCharge.toString());
+            stmt.setString(2, idCobrancaAsaas);
 
             stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizar cobrança", e);
         }
+        catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar status da cobrança" + e.getMessage());
+        }
+    }
+
+    @Override
+    public void atualizarCobranca(CobrancaDTO cobrancaDTO) {
+
     }
 }

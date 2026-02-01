@@ -1,5 +1,7 @@
 package com.charge.chargeManeger.api.controller;
 
+import com.charge.chargeManeger.api.controller.api.ApiResponse;
+import com.charge.chargeManeger.api.dto.ClientCreatedDTO;
 import com.charge.chargeManeger.business.service.ClienteService;
 import com.charge.chargeManeger.api.dto.ClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,21 +10,30 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+* Objetivo: Interceptar requisições destinadas
+* a manipulação dos clientes do sistema
+* */
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/cliente")
 public class ClienteController {
 
     private final ClienteService clienteService;
 
-    @Autowired
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
 
+    /*
+    * Objetivo: Mapear e encaminhar a solicitação de cadastro
+    * de cliente
+    * */
     @PostMapping
-    public ResponseEntity<String> criar(@RequestBody ClienteDTO dto) {
-        clienteService.registrarNovoCliente(dto);
-        return ResponseEntity.ok("Cliente criado com sucesso!");
+    public ResponseEntity<ApiResponse<ClientCreatedDTO>> criar(@RequestBody ClienteDTO dto) throws Exception {
+        String idCliente = clienteService.registrarNovoCliente(dto);
+
+        return ResponseEntity.ok(
+                ApiResponse.sucesso("Cliente cadastrado com sucesso", new ClientCreatedDTO(idCliente)));
     }
 
     @GetMapping

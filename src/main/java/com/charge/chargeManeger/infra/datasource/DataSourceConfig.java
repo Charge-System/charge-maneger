@@ -13,7 +13,7 @@ public class DataSourceConfig {
     public DataSource getDataSource(){
         return DataSourceBuilder.create()
                 .driverClassName("org.postgresql.Driver")
-                .url("jdbc:postgresql://database:5432/charge_db")
+                .url("jdbc:postgresql://127.0.0.1:5432/charge_db")
                 .username("postgres")
                 .password("postgres")
                 .build();
